@@ -486,7 +486,7 @@ footer{border-top:1px solid var(--line);padding:22px 0}
    2. Paste Project URL + anon key below (public by design — RLS locks writes to your email)
    3. Deploy. First CMS login emails you a 6-digit code.
    Leave empty = local mode (this browser only). */
-const SUPA={url:"",anon:""};
+const SUPA={url:"https://ppmizmrstnasubeccuet.supabase.co",anon:"sb_publishable_HjU-vwz78-jO7gPkHRSacw_VjJNwqz5"};
 const cloud=()=>!!(SUPA.url&&SUPA.anon);
 let TOKEN="",USER_EMAIL="";
 async function sb(path,opts={}){const h=opts.headers||{};h["apikey"]=SUPA.anon;if(TOKEN)h["Authorization"]="Bearer "+TOKEN;
