@@ -515,9 +515,23 @@ async function loadCloud(){if(!cloud())return;try{const r=await sb("/rest/v1/sit
    else if(localTime>cloudTime&&cloudTime>0){toast("Local draft is newer — publish to sync")}
    else if(cloudTime>0&&localTime===0){DB.settings=Object.assign({},SEED.settings,cloudData.settings);DB.collections=cloudData.collections;DB.updated_at=cloudTime;save()}
  }}catch(e){}}
-async function publishCloud(){DB.updated_at=Date.now();const r=await sb("/rest/v1/site_content",{method:"POST",
- headers:{"Content-Type":"application/json",Prefer:"resolution=merge-duplicates,return=minimal"},body:JSON.stringify([{id:1,data:DB,updated_at:DB.updated_at}])});
- if(!r.ok)throw 0}
+async function publishCloud(){
+  DB.updated_at = Date.now(); // Keep as number for local JS logic
+  const r = await sb("/rest/v1/site_content", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Prefer": "resolution=merge-duplicates, return=minimal"
+    },
+    // OMIT updated_at here so the DB uses its `default now()`
+    body: JSON.stringify([{ id: 1, data: DB }]) 
+  });
+  if (!r.ok) {
+    const errText = await r.text();
+    console.error("Supabase Publish Error:", errText);
+    throw new Error(errText);
+  }
+}
 async function uploadFrame(blob,name){const path=Date.now()+"-"+name.replace(/[^\w.-]/g,"_").slice(-40);
  const r=await sb("/storage/v1/object/frames/"+path,{method:"POST",headers:{"Content-Type":"image/jpeg"},body:blob});
  if(!r.ok)throw 0;return SUPA.url+"/storage/v1/object/public/frames/"+path}
