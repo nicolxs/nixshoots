@@ -2,7 +2,7 @@
 /**
  * NIXSHOOTS CMS - API Endpoint
  * Version: 4.0.0
- * 
+ * testing
  * JSON API for frontend communication
  */
 
