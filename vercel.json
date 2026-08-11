@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "nixshoots-cms",
+  "name": "nixshoots-site-cms",
   "builds": [
     {
       "src": "**/*.php",
