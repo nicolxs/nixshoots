@@ -59,11 +59,17 @@ switch ($action) {
         break;
         
     case 'version':
-        echo json_encode([
-            'version' => DB_VERSION,
-            'cache_version' => CACHE_VERSION,
-            'timestamp' => time()
-        ]);
+        // Serve version from static file on Vercel, or generate dynamically locally
+        if ($isVercel && file_exists(__DIR__ . '/version.json')) {
+            echo file_get_contents(__DIR__ . '/version.json');
+        } else {
+            echo json_encode([
+                'version' => DB_VERSION,
+                'cache_version' => CACHE_VERSION,
+                'timestamp' => time(),
+                'build' => date('Y-m-d-H-i-s')
+            ]);
+        }
         break;
         
     default:

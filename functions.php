@@ -462,7 +462,11 @@ function generate_version_file() {
         'build' => date('Y-m-d-H-i-s')
     ];
     
-    file_put_contents(__DIR__ . '/version.json', json_encode($versionData, JSON_PRETTY_PRINT));
+    // Only write to filesystem in non-Vercel environments
+    // On Vercel, this is handled at build time
+    if (!$isVercel) {
+        file_put_contents(__DIR__ . '/version.json', json_encode($versionData, JSON_PRETTY_PRINT));
+    }
 }
 
 /**
