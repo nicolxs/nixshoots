@@ -2,7 +2,7 @@
 /**
  * NIXSHOOTS CMS - Core Functions
  * Version: 4.0.0
- * 
+ * testing note
  * Image processing, caching, and utility functions
  */
 
