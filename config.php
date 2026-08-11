@@ -2,7 +2,7 @@
 /**
  * NIXSHOOTS CMS - Configuration
  * Version: 4.0.0
- * 
+ * testing
  * Database and environment configuration
  */
 
